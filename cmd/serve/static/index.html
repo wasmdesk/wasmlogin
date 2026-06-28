@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WASMDESK — Sign in</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="card">
+    <h1 class="title">WASMDESK</h1>
+    <p class="tagline">Sign in to your desktop</p>
+    {{if .Error}}<p class="error" role="alert">{{.Error}}</p>{{end}}
+    <form method="POST" action="/auth" autocomplete="on">
+      <label>
+        <span>Username</span>
+        <input type="text" name="user" required autofocus autocomplete="username" value="{{.User}}">
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" name="password" required autocomplete="current-password">
+      </label>
+      <label>
+        <span>Window manager</span>
+        <select name="wm">
+          {{range .WMs}}<option value="{{.}}"{{if eq . $.PrefWM}} selected{{end}}>{{.}}</option>{{end}}
+        </select>
+      </label>
+      <button type="submit">Sign in</button>
+    </form>
+    <footer>
+      wasmdesk family — go-embedded-ruby + go-quake1 + ociapps
+    </footer>
+  </main>
+</body>
+</html>
