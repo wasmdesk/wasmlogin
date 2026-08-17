@@ -352,8 +352,8 @@ type failingSession struct{ SessionStore }
 func (failingSession) Mint(string, time.Duration) (string, error) {
 	return "", errors.New("mint nope")
 }
-func (failingSession) Verify(string) (string, error)  { return "", errors.New("nope") }
-func (failingSession) Revoke(string) error            { return nil }
+func (failingSession) Verify(string) (string, error) { return "", errors.New("nope") }
+func (failingSession) Revoke(string) error           { return nil }
 
 func TestServer_Auth_MintFail(t *testing.T) {
 	srv, _, _ := newTestServer(t)
