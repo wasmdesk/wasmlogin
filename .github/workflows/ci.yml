@@ -58,6 +58,10 @@ jobs:
         run: go build ./...
 
       - name: go test (race + coverage)
+        # The race detector needs cgo; the runner ships gcc. The production
+        # binary stays pure Go (CGO=0) — this only instruments the tests.
+        env:
+          CGO_ENABLED: "1"
         run: go test -race -coverprofile=coverage.out ./...
 
       - name: Coverage summary
